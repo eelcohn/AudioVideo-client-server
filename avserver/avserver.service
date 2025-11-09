@@ -1,0 +1,14 @@
+[Unit]
+Description=Audio/Video Server Server startup
+After=network.target
+
+[Service]
+ExecStart=/opt/avserver/start.sh
+WorkingDirectory=/opt/avserver
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
