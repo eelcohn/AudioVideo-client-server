@@ -80,9 +80,9 @@ cat rtmp.conf >> /etc/nginx/nginx.conf >> "${LOG_FILE}" 2>&1
 # ----------------------------
 # Install server start service
 # ----------------------------
-cp avserver.service /etc/systemd/system/ >> "${LOG_FILE}" 2>&1
-sed -i "s/^User=pi/User=${SUDO_USER}/" /etc/systemd/system/avserver.service >> "${LOG_FILE}" 2>&1
-chmod +x /etc/systemd/system/avserver.service >> "${LOG_FILE}" 2>&1
+cp "avserver.service" "/etc/systemd/system/" >> "${LOG_FILE}" 2>&1
+sed -i "s/^User=pi/User=${SUDO_USER}/" "/etc/systemd/system/avserver.service" >> "${LOG_FILE}" 2>&1
+chmod +x "/etc/systemd/system/avserver.service" >> "${LOG_FILE}" 2>&1
 sudo systemctl enable avserver.service >> "${LOG_FILE}" 2>&1
 
 # -------
