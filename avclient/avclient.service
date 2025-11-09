@@ -1,0 +1,14 @@
+[Unit]
+Description=Audio/Video client startup
+After=multi-user.target
+
+[Service]
+ExecStart=/opt/avclient/start.sh
+WorkingDirectory=/opt/avclient
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
