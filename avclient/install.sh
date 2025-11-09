@@ -57,9 +57,9 @@ apt-get install -y alsa-utils avahi-daemon git nano pulseaudio pulseaudio-utils 
 # ----------------------------
 # Install client start service
 # ----------------------------
-cp avclient.service /etc/systemd/system/
-sed -i "s/^User=pi/User=${SUDO_USER}/" /etc/systemd/system/avclient.service
-chmod +x /etc/systemd/system/avclient.service
+cp "avclient.service" "/etc/systemd/system/"
+sed -i "s/^User=pi/User=${SUDO_USER}/" "/etc/systemd/system/avclient.service"
+chmod +x "/etc/systemd/system/avclient.service"
 sudo systemctl enable avclient.service
 
 # -------
