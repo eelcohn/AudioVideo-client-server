@@ -72,9 +72,9 @@ apt-get install -y avahi-daemon chromium ffmpeg git icecast2 nano nginx libnginx
 # ---------------------------
 # Configure nginx RTMP server
 # ---------------------------
-mv -f "rtmp.conf" >> "/etc/nginx/conf.d/" >> "${LOG_FILE}" 2>&1
-chmod 644 "/etc/nginx/conf.d/rtmp.conf" >> "${LOG_FILE}" 2>&1
-chown root:root "/etc/nginx/conf.d/rtmp.conf" >> "${LOG_FILE}" 2>&1
+mv -f "rtmp.conf" >> "/etc/nginx/modules-enabled/" >> "${LOG_FILE}" 2>&1
+chmod 644 "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
+chown root:root "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
 #sudo usermod -aG audio www-data # Give nginx permission to use the audio ports
 #sudo usermod -aG video www-data # Give nginx permission to use the video ports
 
