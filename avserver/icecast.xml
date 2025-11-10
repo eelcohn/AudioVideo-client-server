@@ -1,0 +1,39 @@
+<icecast>
+	<hostname>avserver.local</hostname>
+	<location>Earth</location>
+	<admin>icemaster@localhost</admin>
+	<listen-socket>
+		<port>8000</port>
+		<bind-address>0.0.0.0</bind-address> <!-- For listeners -->
+	</listen-socket>
+  
+	<source>
+		<bind-address>127.0.0.1</bind-address> <!-- For sources -->
+	</source>
+
+	<limits>
+		<clients>100</clients>		<!-- Limit client connections -->
+		<sources>1</sources>		<!-- Limit source connections to localhost only -->
+		<burst-on-connect>1</burst-on-connect>
+		<burst-size>65535</burst-size>
+	</limits>
+
+	<authentication>
+		<source-password></source-password>
+		<relay-password>password</relay-password>
+		<admin-user>admin</admin-user>
+		<admin-password>password</admin-password>
+	</authentication>
+
+	<mount>
+		<mount-name>/live</mount-name>
+		<public>1</public>
+		<allow-guest>1</allow-guest>
+		<max-listeners>100</max-listeners>
+<!--
+	<authentication>
+			<source></source>
+		</authentication>
+-->
+	</mount>
+</icecast>
