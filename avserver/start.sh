@@ -15,7 +15,13 @@ xvfb-run \
 	--listen-tcp \
 	--server-num ${SCREEN_ID} \
 	-s "-ac -screen 0 1920x1080x24" \
-	chromium --password-store=basic --start-fullscreen --window-size=1920,1080 --window-position=0,0 ${URL} &
+	chromium \
+		--password-store=basic \
+		--disable-session-crashed-bubble \
+		--disable-infobars \
+		--start-fullscreen \
+		--window-size=1920,1080 \
+		--window-position=0,0 ${URL} &
 
 # Generate a audio/video stream to the nginx RTMP and an audio-only stream to the Icecast2 server
 ffmpeg \
