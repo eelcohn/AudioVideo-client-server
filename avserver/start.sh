@@ -29,7 +29,7 @@ ffmpeg \
 	-f x11grab -video_size 1920x1080 -i :${SCREEN_ID} \
 	-f alsa -i default \
 	-codec:v h264_v4l2m2m -r 30 -codec:a aac -b:a 192k -f flv ${RTMP_SERVER} \
-	-vn -c:a copy -f icecast "${ICECAST_SERVER}"
+	-vn -c:a libmp3-lame -b:a 192k -f mp3 "${ICECAST_SERVER}"
 
 pkill chromium
 pkill xvfb-run
