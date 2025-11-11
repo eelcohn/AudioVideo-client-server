@@ -3,8 +3,8 @@ Description=Audio/Video Server Server startup
 After=network.target
 
 [Service]
-ExecStart=/opt/avserver/start.sh
-WorkingDirectory=/opt/avserver
+ExecStart=/opt/AudioVideo-client-server/avserver/start.sh
+WorkingDirectory=/opt/AudioVideo-client-server/avserver
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
