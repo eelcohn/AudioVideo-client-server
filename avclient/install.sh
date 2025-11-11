@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-APP_NAME="avclient"
+APP_NAME="AudioVideo-client-server"
+APP_ITEM="avclient"
 LOG_FILE="/var/log/${APP_NAME}/install.log"
 
 # ----------------------------------
@@ -57,23 +58,23 @@ apt-get install -y alsa-utils avahi-daemon git nano pulseaudio pulseaudio-utils 
 # -------------------
 # Install application
 # -------------------
-echo "$(date +%c) Installing ${APP_NAME}" >> "${LOG_FILE}" 2>&1
-git clone ${APP_SOURCE} "/opt/${APP_NAME}" >> "${LOG_FILE}" 2>&1
-chmod +x "/opt/${APP_NAME}/avclient/*.sh" >> "${LOG_FILE}" 2>&1
-chmod +x "/opt/${APP_NAME}/avclient/*.service" >> "${LOG_FILE}" 2>&1
+echo "$(date +%c) Installing ${APP_NAME} - ${APP_ITEM}" >> "${LOG_FILE}" 2>&1
+git clone ${APP_SOURCE} "/opt/" >> "${LOG_FILE}" 2>&1
+chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.sh" >> "${LOG_FILE}" 2>&1
+chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.service" >> "${LOG_FILE}" 2>&1
 
 # ----------------------------
 # Install application service
 # ----------------------------
-cp "/opt/${APP_NAME}/avclient/avclient.service" "/etc/systemd/system/"
-sed -i "s/^User=pi/User=${SUDO_USER}/" "/etc/systemd/system/avclient.service"
-chmod +x "/etc/systemd/system/avclient.service"
-sudo systemctl enable avclient.service
+cp "/opt/${APP_NAME}/${APP_ITEM}/${APP_ITEM}.service" "/etc/systemd/system/" >> "${LOG_FILE}" 2>&1
+sed -i "s/^User=pi/User=${SUDO_USER}/" "/etc/systemd/system/${APP_ITEM}.service"
+chmod +x "/etc/systemd/system/${APP_ITEM}.service"
+sudo systemctl enable ${APP_ITEM}.service
 
 # -------
 # Restart
 # -------
-echo "$(date +%c) Installer done for ${APP_NAME}" >> "${LOG_FILE}" 2>&1
+echo "$(date +%c) Installer done for ${APP_NAME} - ${APP_ITEM}" >> "${LOG_FILE}" 2>&1
 echo -n 'Restarting in 10 seconds'
 for i in {0..10}
 do
