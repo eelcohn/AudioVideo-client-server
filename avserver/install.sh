@@ -69,6 +69,14 @@ echo "icecast2 icecast2/crypt_password string ${ICECAST_PASSWORD}" | debconf-set
 
 apt-get install -y avahi-daemon chromium ffmpeg git icecast2 nano nginx libnginx-mod-rtmp sed unattended-upgrades xvfb >> "${LOG_FILE}" 2>&1
 
+# -------------------
+# Install application
+# -------------------
+echo "$(date +%c) Installing ${APP_NAME}" >> "${LOG_FILE}" 2>&1
+git clone ${APP_SOURCE} "/opt/" >> "${LOG_FILE}" 2>&1
+chmod +x "/opt/AudioVideo-client-server/${APP_NAME}/*.sh" >> "${LOG_FILE}" 2>&1
+chmod +x "/opt/AudioVideo-client-server/${APP_NAME}/*.service" >> "${LOG_FILE}" 2>&1
+
 # ---------------------------
 # Configure nginx RTMP server
 # ---------------------------
@@ -79,9 +87,9 @@ chown root:root "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
 #sudo usermod -aG video www-data # Give nginx permission to use the video ports
 
 # ----------------------------
-# Install server start service
+# Install application service
 # ----------------------------
-cp "avserver.service" "/etc/systemd/system/" >> "${LOG_FILE}" 2>&1
+cp "/opt/AudioVideo-client-server/${APP_NAME}/avclient.service" "/etc/systemd/system/" >> "${LOG_FILE}" 2>&1
 sed -i "s/^User=pi/User=${SUDO_USER}/" "/etc/systemd/system/avserver.service" >> "${LOG_FILE}" 2>&1
 chmod +x "/etc/systemd/system/avserver.service" >> "${LOG_FILE}" 2>&1
 sudo systemctl enable avserver.service >> "${LOG_FILE}" 2>&1
