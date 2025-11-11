@@ -82,7 +82,7 @@ chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.service" >> "${LOG_FILE}" 2>&1
 # ---------------------------
 # Configure nginx RTMP server
 # ---------------------------
-mv -f "rtmp.conf" >> "/etc/nginx/modules-enabled/" >> "${LOG_FILE}" 2>&1
+mv -f "rtmp.conf" "/etc/nginx/modules-enabled/" >> "${LOG_FILE}" 2>&1
 chmod 644 "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
 chown root:root "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
 #sudo usermod -aG audio www-data # Give nginx permission to use the audio ports
