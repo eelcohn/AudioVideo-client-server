@@ -60,7 +60,7 @@ apt-get install -y alsa-utils avahi-daemon git nano pulseaudio pulseaudio-utils 
 # Install application
 # -------------------
 echo "$(date +%c) Installing ${APP_NAME} - ${APP_ITEM}" >> "${LOG_FILE}" 2>&1
-git clone ${APP_SOURCE} "/opt/" >> "${LOG_FILE}" 2>&1
+git clone "${APP_SOURCE}" "/opt/${APP_SOURCE}" >> "${LOG_FILE}" 2>&1
 chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.sh" >> "${LOG_FILE}" 2>&1
 chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.service" >> "${LOG_FILE}" 2>&1
 
