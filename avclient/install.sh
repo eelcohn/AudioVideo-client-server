@@ -28,7 +28,7 @@ echo "$(date +%c) Window manager: ${XDG_SESSION_TYPE}" >> "${LOG_FILE}" 2>&1
 # Expand the rootfs filesystem
 # ----------------------------
 echo "$(date +%c) Expanding rootfs" >> "${LOG_FILE}" 2>&1
-sudo raspi-config --expand-rootfs >> "${LOG_FILE}" 2>&1
+raspi-config --expand-rootfs >> "${LOG_FILE}" 2>&1
 
 # -------------
 # Update system
@@ -70,7 +70,7 @@ chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.service" >> "${LOG_FILE}" 2>&1
 cp "/opt/${APP_NAME}/${APP_ITEM}/${APP_ITEM}.service" "/etc/systemd/system/" >> "${LOG_FILE}" 2>&1
 sed -i "s/^User=pi/User=${SUDO_USER}/" "/etc/systemd/system/${APP_ITEM}.service"
 chmod +x "/etc/systemd/system/${APP_ITEM}.service"
-sudo systemctl enable ${APP_ITEM}.service
+systemctl enable ${APP_ITEM}.service
 
 # -------
 # Restart
