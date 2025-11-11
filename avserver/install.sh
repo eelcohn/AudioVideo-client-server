@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-APP_NAME="avserver"
+APP_NAME="AudioVideo-client-server"
+APP_ITEM="avserver"
 LOG_FILE="/var/log/${APP_NAME}/install.log"
 
 ICECAST_HOSTNAME="avserver.local"
@@ -72,10 +73,10 @@ apt-get install -y avahi-daemon chromium ffmpeg git icecast2 nano nginx libnginx
 # -------------------
 # Install application
 # -------------------
-echo "$(date +%c) Installing ${APP_NAME}" >> "${LOG_FILE}" 2>&1
+echo "$(date +%c) Installing ${APP_NAME} - ${APP_ITEM}" >> "${LOG_FILE}" 2>&1
 git clone ${APP_SOURCE} "/opt/" >> "${LOG_FILE}" 2>&1
-chmod +x "/opt/AudioVideo-client-server/${APP_NAME}/*.sh" >> "${LOG_FILE}" 2>&1
-chmod +x "/opt/AudioVideo-client-server/${APP_NAME}/*.service" >> "${LOG_FILE}" 2>&1
+chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.sh" >> "${LOG_FILE}" 2>&1
+chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.service" >> "${LOG_FILE}" 2>&1
 
 # ---------------------------
 # Configure nginx RTMP server
@@ -89,7 +90,7 @@ chown root:root "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
 # ----------------------------
 # Install application service
 # ----------------------------
-cp "/opt/AudioVideo-client-server/${APP_NAME}/avclient.service" "/etc/systemd/system/" >> "${LOG_FILE}" 2>&1
+cp "/opt/${APP_NAME}/${APP_ITEM}/${APP_ITEM}.service" "/etc/systemd/system/" >> "${LOG_FILE}" 2>&1
 sed -i "s/^User=pi/User=${SUDO_USER}/" "/etc/systemd/system/avserver.service" >> "${LOG_FILE}" 2>&1
 chmod +x "/etc/systemd/system/avserver.service" >> "${LOG_FILE}" 2>&1
 sudo systemctl enable avserver.service >> "${LOG_FILE}" 2>&1
@@ -97,7 +98,7 @@ sudo systemctl enable avserver.service >> "${LOG_FILE}" 2>&1
 # -------
 # Restart
 # -------
-echo "$(date +%c) Installer done for ${APP_NAME}" >> "${LOG_FILE}" 2>&1
+echo "$(date +%c) Installer done for ${APP_NAME} - ${APP_ITEM}" >> "${LOG_FILE}" 2>&1
 echo -n 'Restarting in 10 seconds'
 for i in {0..10}
 do
