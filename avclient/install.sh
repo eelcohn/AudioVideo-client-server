@@ -3,7 +3,7 @@
 APP_NAME="AudioVideo-client-server"
 APP_ITEM="avclient"
 APP_SOURCE="https://github.com/eelcohn/${APP_NAME}"
-LOG_FILE="/var/log/${APP_NAME}/install.log"
+LOG_FILE="/var/log/${APP_NAME}/${APP_ITEM}.log"
 
 # ----------------------------------
 # Check if user has root permissions
