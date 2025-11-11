@@ -54,10 +54,18 @@ apt-get -y autoremove >> "${LOG_FILE}" 2>&1
 echo "$(date +%c) Installing packages" >> "${LOG_FILE}" 2>&1
 apt-get install -y alsa-utils avahi-daemon git nano pulseaudio pulseaudio-utils sed unattended-upgrades vlc >> "${LOG_FILE}" 2>&1
 
+# -------------------
+# Install application
+# -------------------
+echo "$(date +%c) Installing ${APP_NAME}" >> "${LOG_FILE}" 2>&1
+git clone ${APP_SOURCE} "/opt/${APP_NAME}" >> "${LOG_FILE}" 2>&1
+chmod +x "/opt/${APP_NAME}/avclient/*.sh" >> "${LOG_FILE}" 2>&1
+chmod +x "/opt/${APP_NAME}/avclient/*.service" >> "${LOG_FILE}" 2>&1
+
 # ----------------------------
-# Install client start service
+# Install application service
 # ----------------------------
-cp "avclient.service" "/etc/systemd/system/"
+cp "/opt/${APP_NAME}/avclient/avclient.service" "/etc/systemd/system/"
 sed -i "s/^User=pi/User=${SUDO_USER}/" "/etc/systemd/system/avclient.service"
 chmod +x "/etc/systemd/system/avclient.service"
 sudo systemctl enable avclient.service
