@@ -3,6 +3,7 @@
 APP_NAME="AudioVideo-client-server"
 APP_ITEM="avserver"
 APP_SOURCE="https://github.com/eelcohn/${APP_NAME}"
+APP_PATH="/opt/${APP_NAME}/${APP_ITEM}"
 LOG_FILE="/var/log/${APP_NAME}/${APP_ITEM}.log"
 
 ICECAST_HOSTNAME="avserver.local"
@@ -76,13 +77,13 @@ apt-get install -y avahi-daemon chromium ffmpeg git icecast2 nano nginx libnginx
 # -------------------
 echo "$(date +%c) Installing ${APP_NAME} - ${APP_ITEM}" >> "${LOG_FILE}" 2>&1
 git clone "${APP_SOURCE}" "/opt/${APP_NAME}" >> "${LOG_FILE}" 2>&1
-chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.sh" >> "${LOG_FILE}" 2>&1
-chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.service" >> "${LOG_FILE}" 2>&1
+chmod +x "${APP_PATH}/*.sh" >> "${LOG_FILE}" 2>&1
+chmod +x "${APP_PATH}/*.service" >> "${LOG_FILE}" 2>&1
 
 # ---------------------------
 # Configure nginx RTMP server
 # ---------------------------
-mv -f "rtmp.conf" "/etc/nginx/modules-enabled/" >> "${LOG_FILE}" 2>&1
+mv -f "${APP_PATH}/rtmp.conf" "/etc/nginx/modules-enabled/" >> "${LOG_FILE}" 2>&1
 chmod 644 "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
 chown root:root "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
 #usermod -aG audio www-data # Give nginx permission to use the audio ports
@@ -91,7 +92,7 @@ chown root:root "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
 # ----------------------------
 # Install application service
 # ----------------------------
-cp "/opt/${APP_NAME}/${APP_ITEM}/${APP_ITEM}.service" "/etc/systemd/system/" >> "${LOG_FILE}" 2>&1
+cp "${APP_PATH}/${APP_ITEM}.service" "/etc/systemd/system/" >> "${LOG_FILE}" 2>&1
 sed -i "s/^User=pi/User=${SUDO_USER}/" "/etc/systemd/system/avserver.service" >> "${LOG_FILE}" 2>&1
 chmod +x "/etc/systemd/system/avserver.service" >> "${LOG_FILE}" 2>&1
 systemctl enable avserver.service >> "${LOG_FILE}" 2>&1
