@@ -3,7 +3,7 @@
 APP_NAME="AudioVideo-client-server"
 APP_ITEM="avserver"
 APP_SOURCE="https://github.com/eelcohn/${APP_NAME}"
-LOG_FILE="/var/log/${APP_NAME}/install.log"
+LOG_FILE="/var/log/${APP_NAME}/${APP_ITEM}.log"
 
 ICECAST_HOSTNAME="avserver.local"
 ICECAST_USERNAME="avserver"
