@@ -69,7 +69,7 @@ echo "icecast2 icecast2/password string ${ICECAST_PASSWORD}" | debconf-set-selec
 echo "icecast2 icecast2/relay_password string ${ICECAST_PASSWORD}" | debconf-set-selections >> "${LOG_FILE}" 2>&1
 echo "icecast2 icecast2/crypt_password string ${ICECAST_PASSWORD}" | debconf-set-selections >> "${LOG_FILE}" 2>&1
 
-apt-get install -y avahi-daemon chromium ffmpeg git icecast2 nano nginx libnginx-mod-rtmp sed unattended-upgrades xvfb >> "${LOG_FILE}" 2>&1
+apt-get install -y avahi-daemon chromium ffmpeg git icecast2 nano nginx libnginx-mod-rtmp sed unattended-upgrades xvfb x11-xserver-utils >> "${LOG_FILE}" 2>&1
 
 # -------------------
 # Install application
