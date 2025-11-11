@@ -32,7 +32,7 @@ echo "$(date +%c) Window manager: ${XDG_SESSION_TYPE}" >> "${LOG_FILE}" 2>&1
 # Expand the rootfs filesystem
 # ----------------------------
 echo "$(date +%c) Expanding rootfs" >> "${LOG_FILE}" 2>&1
-sudo raspi-config --expand-rootfs >> "${LOG_FILE}" 2>&1
+raspi-config --expand-rootfs >> "${LOG_FILE}" 2>&1
 
 # -------------
 # Update system
@@ -85,8 +85,8 @@ chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.service" >> "${LOG_FILE}" 2>&1
 mv -f "rtmp.conf" "/etc/nginx/modules-enabled/" >> "${LOG_FILE}" 2>&1
 chmod 644 "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
 chown root:root "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
-#sudo usermod -aG audio www-data # Give nginx permission to use the audio ports
-#sudo usermod -aG video www-data # Give nginx permission to use the video ports
+#usermod -aG audio www-data # Give nginx permission to use the audio ports
+#usermod -aG video www-data # Give nginx permission to use the video ports
 
 # ----------------------------
 # Install application service
@@ -94,7 +94,7 @@ chown root:root "/etc/nginx/modules-enabled/rtmp.conf" >> "${LOG_FILE}" 2>&1
 cp "/opt/${APP_NAME}/${APP_ITEM}/${APP_ITEM}.service" "/etc/systemd/system/" >> "${LOG_FILE}" 2>&1
 sed -i "s/^User=pi/User=${SUDO_USER}/" "/etc/systemd/system/avserver.service" >> "${LOG_FILE}" 2>&1
 chmod +x "/etc/systemd/system/avserver.service" >> "${LOG_FILE}" 2>&1
-sudo systemctl enable avserver.service >> "${LOG_FILE}" 2>&1
+systemctl enable avserver.service >> "${LOG_FILE}" 2>&1
 
 # -------
 # Restart
