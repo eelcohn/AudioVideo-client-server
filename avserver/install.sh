@@ -75,7 +75,7 @@ apt-get install -y avahi-daemon chromium ffmpeg git icecast2 nano nginx libnginx
 # Install application
 # -------------------
 echo "$(date +%c) Installing ${APP_NAME} - ${APP_ITEM}" >> "${LOG_FILE}" 2>&1
-git clone ${APP_SOURCE} "/opt/" >> "${LOG_FILE}" 2>&1
+git clone "${APP_SOURCE}" "/opt/${APP_SOURCE}" >> "${LOG_FILE}" 2>&1
 chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.sh" >> "${LOG_FILE}" 2>&1
 chmod +x "/opt/${APP_NAME}/${APP_ITEM}/*.service" >> "${LOG_FILE}" 2>&1
 
